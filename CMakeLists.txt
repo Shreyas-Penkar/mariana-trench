@@ -6,6 +6,10 @@
 cmake_minimum_required(VERSION 3.19.3 FATAL_ERROR)
 project(MarianaTrench VERSION 0.1 LANGUAGES CXX)
 
+set(JSONCPP_ROOT "/opt/homebrew/opt/jsoncpp")  # Use /opt/homebrew/opt/zlib for Apple Silicon
+set(JSONCPP_INCLUDE_DIRS "${JSONCPP_ROOT}/include")
+set(JSONCPP_LIBRARIES "${JSONCPP_ROOT}/lib/libjsoncpp.dylib")
+
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR
     "In-source builds are not allowed. Please clean your source tree and try again.")
@@ -123,7 +127,7 @@ target_link_libraries(mariana-trench-library PUBLIC
                       Boost::iostreams
                       Boost::thread
                       GTest::gtest
-                      JsonCpp::JsonCpp
+                      ${JSONCPP_LIBRARIES}
                       fmt::fmt
                       re2::re2
                       Redex::LibTool
